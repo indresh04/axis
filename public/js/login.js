@@ -216,7 +216,8 @@ function verifyOTP() {
         } else {
             console.log(data.error)
             if(data.error==='number already exist'){
-                window.location.href = '/rewardpoints'
+                window.location.href = '/rewardpoints';
+                return
             }
             verifyButton.disabled = false;
             verifyButton.textContent = 'Verify';
@@ -236,10 +237,8 @@ function verifyOTP() {
 
 
 function resendOTP() {
-    sendOTP();
 
     let errorElement = document.getElementById('otpError');
-    
     // Create error element only if it doesn't exist
     if (!errorElement) {
       errorElement = document.createElement('p');
@@ -253,6 +252,10 @@ function resendOTP() {
     }
 
     errorElement.style.color = 'Green';
-    errorElement.textContent = 'OTP sent again... ';
+    errorElement.textContent = 'Sending OTP';
+    sendOTP();
+    errorElement.style.color = 'Green';
+    errorElement.textContent = 'OTP Sent Again..';
+
     
   }
